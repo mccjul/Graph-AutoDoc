@@ -3,8 +3,11 @@ engines:
     enabled: true
     channel: beta
     config: tslint.json
+  csslint:
+    enabled: true
 ratings:
   paths:
+    - "**.css"
     - "**.ts"
 exclude_paths:
   - bin
