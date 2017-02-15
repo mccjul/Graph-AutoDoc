@@ -1,4 +1,6 @@
 # Skel
+[![Coverage Status](https://coveralls.io/repos/github/mccjul/Graph-AutoDoc/badge.svg?branch=master)](https://coveralls.io/github/mccjul/Graph-AutoDoc?branch=master)
+[![CircleCI](https://circleci.com/gh/mccjul/Graph-AutoDoc.svg?style=svg)](https://circleci.com/gh/mccjul/Graph-AutoDoc)
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.28.3.
 
