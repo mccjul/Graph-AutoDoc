@@ -14,7 +14,7 @@ dependencies:
     # - docker login -u $DOCKER_USER -p $DOCKER_PASS -e $DOCKER_EMAIL $DOCKER_REGISTRY
     - yarn global add protractor coveralls
   override:
-    - yarn --ignore-scripts
+    - yarn
   cache_directories:
     - ~/.cache/yarn
 
