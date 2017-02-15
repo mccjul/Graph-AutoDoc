@@ -1,0 +1,27 @@
+machine:
+  pre:
+    - mkdir ~/.yarn-cache
+  services:
+    # - docker
+  node:
+    version: 7
+
+# Dependencies
+
+dependencies:
+  pre:
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+    # - docker login -u $DOCKER_USER -p $DOCKER_PASS -e $DOCKER_EMAIL $DOCKER_REGISTRY
+    - yarn global add protractor coveralls
+  override:
+    - yarn --ignore-scripts
+  cache_directories:
+    - ~/.cache/yarn
+
+# Test Commands
+
+test:
+  override:
+    - yarn run test
+  post:
+    - yarn run coverage
