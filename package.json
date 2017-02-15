@@ -6,7 +6,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "test": "ng test",
+    "test": "ng test --code-coverage",
     "pree2e": "webdriver-manager update --standalone false --gecko false",
     "coverage": "coveralls < ./coverage/coverage.lcov",
     "e2e": "protractor"
