@@ -4,15 +4,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
-import { HomeService } from './services/data/home.service';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 import 'hammerjs';
+
+import { HomeService } from './services/data/home.service';
+import { ConfigService } from './services/data/config.service';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { ConfigComponent, DialogComponent } from './config/config.component';
 import { ToastComponent } from './shared/toast/toast.component';
 
 const routing = RouterModule.forRoot([
     { path: '', component: HomeComponent},
+    { path: 'config', component: ConfigComponent },
     { path: '**', redirectTo: '' }
 ]);
 
@@ -20,7 +26,9 @@ const routing = RouterModule.forRoot([
   declarations: [
     AppComponent,
     HomeComponent,
-    ToastComponent
+    ToastComponent,
+    ConfigComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -28,9 +36,11 @@ const routing = RouterModule.forRoot([
     HttpModule,
     MaterialModule,
     routing,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FlexLayoutModule
   ],
-  providers: [HomeService],
-  bootstrap: [AppComponent]
+  providers: [HomeService, ConfigService],
+  bootstrap: [AppComponent],
+  entryComponents: [DialogComponent]
 })
 export class AppModule { }

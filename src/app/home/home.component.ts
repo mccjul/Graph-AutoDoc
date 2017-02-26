@@ -8,9 +8,9 @@ import {FormControl} from '@angular/forms';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  states = [];
   stateCtrl: FormControl;
   filteredStates: any;
-  states = [];
 
   constructor(private dataService: HomeService) {
     this.stateCtrl = new FormControl();

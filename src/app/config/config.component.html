@@ -1,3 +1,31 @@
-<p>
-  config works!
-</p>
+<md-toolbar color="primary">
+  GraphQL AutoDoc
+  <span class="app-toolbar-filler"></span>
+  <button md-raised-button color="accent" routerLink="">LOGOUT</button>
+</md-toolbar>
+
+<div class="flex-container app-content" 
+     fxLayout="row" 
+     fxLayout.xs="column"
+     fxLayoutAlign="center center"
+     fxLayoutAlign.xs="start">
+  <div *ngFor="let schema of schemas" fxFlex>
+    <md-card>
+      <md-card-header>
+        <img md-card-sm-image/>
+        <button md-button (click)="openDialog(schema)"><md-icon>settings</md-icon></button>
+        <md-card-title>{{schema.name}}</md-card-title>
+      </md-card-header>
+      <md-card-content>
+        <p>
+          {{schema.updated}}
+        </p>
+      </md-card-content>
+    </md-card>
+  </div>
+  <md-card>
+      <md-card-content>
+        <button md-button (click)="newSchema()"><md-icon>add circle outline</md-icon></button>
+      </md-card-content>
+    </md-card>
+</div>
