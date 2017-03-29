@@ -1,0 +1,25 @@
+<div class="flex-container app-content" 
+     fxLayout="row" 
+     fxLayout.xs="column"
+     fxLayoutAlign="center center"
+     fxLayoutAlign.xs="start">
+  <div *ngFor="let schema of schemas" fxFlex>
+    <md-card>
+      <md-card-header>
+        <button md-button (click)="openDialog(schema)"><md-icon>settings</md-icon></button>
+        <img md-card-avatar src="assets/graphql-logo.svg">
+      </md-card-header>
+      <md-card-content>
+         <h4>Schema Name: {{schema.name}}</h4>
+      </md-card-content>
+      <md-card-actions>
+        <button md-button (click)="view(schema.id)">View</button>
+      </md-card-actions>
+    </md-card>
+  </div>
+  <md-card>
+      <md-card-content>
+        <button md-button (click)="newSchema()"><md-icon>add circle outline</md-icon></button>
+      </md-card-content>
+    </md-card>
+</div>
