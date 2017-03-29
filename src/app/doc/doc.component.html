@@ -1,3 +1,20 @@
-<p>
-  doc works!
-</p>
+<md-toolbar color="warn">
+   Doc: doc
+</md-toolbar>
+
+<div class="flex-container app-content" 
+     fxLayout="row" 
+     fxLayout.xs="column"
+     fxLayoutAlign="center center"
+     fxLayoutAlign.xs="start">
+  <div *ngFor="let doc of docs" fxFlex>
+    <md-card>
+      <md-card-header>
+        <md-card-title>{{doc.comment}}</md-card-title>
+      </md-card-header>
+      <md-card-content>
+         <code>{{doc.typecode}}</code>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>

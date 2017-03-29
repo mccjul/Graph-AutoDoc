@@ -1,6 +1,7 @@
 import { HomeService } from './../services/data/home.service';
 import { Component, OnInit } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import { FormControl } from '@angular/forms';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ export class HomeComponent implements OnInit {
   stateCtrl: FormControl;
   filteredStates: any;
 
-  constructor(private dataService: HomeService) {
+  constructor(private dataService: HomeService, private router: Router) {
     this.stateCtrl = new FormControl();
     this.filteredStates = this.stateCtrl.valueChanges
         .startWith(null)
@@ -32,6 +33,6 @@ export class HomeComponent implements OnInit {
   }
 
   search(repo) {
-    console.log(this.stateCtrl.value);
+    this.router.navigate(['/doc', this.stateCtrl.value.id]);
   }
 }

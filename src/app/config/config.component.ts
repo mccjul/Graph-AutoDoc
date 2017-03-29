@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { ConfigService } from './../services/data/config.service';
+import { Router } from "@angular/router";
 
 interface AppType {
   id: String;
   name: String;
-  updated: String;
-  public: Boolean;
-  client: String;
   token: String;
   maintainer: String;
 }
@@ -19,20 +17,21 @@ interface AppType {
 })
 export class ConfigComponent implements OnInit {
   schemas: AppType[];
-  constructor(public dialog: MdDialog, public service: ConfigService) { }
+  constructor(
+    public dialog: MdDialog, 
+    public service: ConfigService, 
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.getSchemas();
   }
 
   getSchemas() {
-    this.schemas = [
-    {id: '3', name: 'bob', updated: 'yesterday', public: true,
-    client: 'kdhj-283jd-jjos', token: 'kdhj-283jd-jjos', maintainer: 'kdhj-283jd-jjos'},
-    {id: '3', name: 'hop', updated: 'today', public: true,
-    client: 'kdhj-283jd-jjos', token: 'kdhj-283jd-jjos', maintainer: 'kdhj-283jd-jjos'},
-    {id: '3', name: 'bopper', updated: '3 days ago', public: true,
-    client: 'kdhj-283jd-jjos', token: 'kdhj-283jd-jjos', maintainer: 'kdhj-283jd-jjos'}];
+    this.service.getApps().subscribe(
+      (data)=>{
+        this.schemas = data;
+    }, (err)=>{});
   }
 
   openDialog(schema) {
@@ -40,12 +39,22 @@ export class ConfigComponent implements OnInit {
     const instance = dialogRef.componentInstance;
     instance.config = schema;
     dialogRef.afterClosed().subscribe(result => {
-      // this.getSchemas();
+      this.getSchemas();
     });
   }
 
   newSchema() {
-    this.service.createApp();
+     this.service.createApp().subscribe(
+       (data) => {}, 
+       (err) => {},
+       () => {
+          this.getSchemas();
+       });
+     
+  }
+
+  view(id) {
+    this.router.navigate(['/doc', id]);
   }
 }
 
@@ -54,15 +63,40 @@ export class ConfigComponent implements OnInit {
   templateUrl: './dialog.html',
 })
 export class DialogComponent {
-  config = {};
+  config: AppType;
   confirm = 'Delete';
-  constructor(public dialogRef: MdDialogRef<DialogComponent>) {}
+  constructor(
+    public dialogRef: MdDialogRef<DialogComponent>, 
+    public service: ConfigService
+) {}
 
   click(state) {
     if (state === 'Delete') {
       this.confirm = 'Are you sure?';
     } else if (state === 'Are you sure?') {
-      this.dialogRef.close('Delete');
+      this.service.DeleteApp(this.config.id).subscribe(
+       (data) => {}, 
+       (err) => {},
+       () => {
+          this.dialogRef.close();
+       });
+      
     }
+  }
+
+  onKey(event: any) { // without type info
+    this.config.name = event.target.value;
+  }
+
+  save(config){
+    console.log(config, "config");
+    this.service.patchApp(this.config, this.config.id).subscribe(
+       (data) => {}, 
+       (err) => {
+         console.log(err);
+       },
+       () => {
+          this.dialogRef.close();
+       });
   }
 }

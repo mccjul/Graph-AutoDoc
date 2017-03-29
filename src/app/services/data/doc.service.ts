@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import data from '../sample/doc';
 
 @Injectable()
 export class DocService {
@@ -11,15 +12,14 @@ export class DocService {
         this.options = new RequestOptions({ headers: this.headers });
      }
 
-    getDoc(id): Observable<any> {
-        return this.http.get(this.url + '/' + id, this.options)
+    getDoc(obj): Observable<Type[]> {
+        return this.http.get(this.url + '/' + obj.value.id, this.options)
             .map((res) => res.json())
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+            .catch((error: any) => error.json().error);
     }
+}
 
-    getMetaDoc(): Observable<any> {
-        return this.http.get(this.url, this.options)
-            .map((res) => res.json())
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-    }
+interface Type {
+  comment: String;
+  typecode: String;
 }

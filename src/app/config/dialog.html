@@ -2,25 +2,23 @@
 <md-dialog-content>
   <form style="padding-top: 20px">
     <md-input-container style="width: 100%">
-       <input mdInput placeholder="Name" value={{config.name}}>
+       <input mdInput placeholder="Name" value={{config.name}} (keyup)="onKey($event)">
     </md-input-container>
     <table style="width: 100%" cellspacing="0"><tr>
       <td>
         <md-input-container style="width: 100%">
-          <input mdInput placeholder="Token ID" disabled value="Google">
+          <input mdInput placeholder="Client ID" disabled value={{config.client}}>
         </md-input-container>
       </td>
-      <td><button md-raised-button color="accent">Generate new ID</button></td>
-    </tr></table>
-    <table style="width: 100%" cellspacing="0"><tr>
-      <td><md-input-container style="width: 100%">
-       <input mdInput placeholder="Public" disabled value={{config.status}}>
-    </md-input-container></td>
-    <td><button md-raised-button color="accent">Change Viewability</button></td>
+      <td>
+        <md-input-container style="width: 100%">
+          <input mdInput placeholder="Token ID" disabled value={{config.token}}>
+        </md-input-container>
+      </td>
     </tr></table>
   </form>
 </md-dialog-content>
 <md-dialog-actions>
-  <button md-raised-button >Save</button>
+  <button md-raised-button (click)="save(config)">Save</button>
   <button md-raised-button (click)="click(confirm)" color="warn">{{confirm}}</button>
 </md-dialog-actions>

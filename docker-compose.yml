@@ -1,0 +1,18 @@
+version: '2'
+services:
+  web:
+    build: .
+    ports:
+    - "4200:4200"
+    depends_on:
+    - backend
+  mongo:
+    image: mongo
+    ports: 
+    - "27017:27017"
+  backend:
+    image: dethbug/graphql-server
+    ports: 
+    - "1323:1323"
+    links: 
+    - mongo
